@@ -1,4 +1,5 @@
 const packagesModels = require("../models/packages-models");
+const categoriesModels = require('../models/category-models');
 const formResponse = require("../helpers/form-response");
 
 module.exports = {
@@ -20,6 +21,20 @@ module.exports = {
     .catch(error => {
       res.json(error)
     })
+  },
+
+  addPackage: (req, res) => {
+    const name = req.body.name;
+    const price = req.body.price;
+    const validUntil = req.body.validUntil;
+    const description = req.body.description;
+    const termsCondition = req.body.termsCondition;
+    const category = req.body.category; // category ID
+    const subCategory = req.body.subCategory; // subcategory ID of the selected category
+    const packageItems = req.body.packageItems; //array of package items ID
+
+    //what to get : packageitems by id, categoryname by category id, subcategoryname by subcategory id
+
   }
  
   // getPackagesByCategory: (req, res) => {
