@@ -27,7 +27,7 @@ const categoryModels = {
         })
     },
 
-    getSubCategory: (categoryID, subCategoryID) => {
+    getSubCategory: (categoryID, subcategoryID) => {
         return new Promise((resolve, reject) => {
             tmp = conn().collection('category').find({id:categoryID}).toArray()
             .then(result => {
@@ -35,7 +35,7 @@ const categoryModels = {
             })
             .then(result => [
                 result.subcategories.map(subcategory => {
-                    if(subCategoryID == subcategory.id){
+                    if(subcategoryID == subcategory.id){
                         resolve(subcategory);
                     }
                 })

@@ -7,6 +7,6 @@ router
     .get('/', categoryController.getAllCategories)
     .get('/:id', categoryController.getCategoryByID)
     .get('/sub/:categoryID', categoryController.getAllSubCategories)
-    .get('/sub/:categoryID/:subCategoryID', categoryController.getSubCategory)
+    .get('/sub/:categoryID/:subcategoryID', categoryController.getSubCategory)
 
 module.exports = router;

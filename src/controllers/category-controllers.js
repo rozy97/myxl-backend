@@ -30,8 +30,8 @@ module.exports = {
 
     getSubCategory: (req, res) => {
         const categoryID = req.params.categoryID;
-        const subCategoryID = req.params.subCategoryID;
-        categoriesModels.getSubCategory(categoryID,subCategoryID)
+        const subcategoryID = req.params.subcategoryID;
+        categoriesModels.getSubCategory(categoryID,subcategoryID)
         .then(result => {
             formResponse.success(res, 200, result);
         })

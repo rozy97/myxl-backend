@@ -14,7 +14,13 @@ const packagesModels = {
   getPackage: (id) => {
     return new Promise((resolve, reject) => {
       result = conn().collection('packages').find({id:id}).toArray();
-
+      resolve(result);
+    })
+  },
+  
+  addPackage: (data) => {
+    return new Promise((resolve, reject) => {
+      result = conn().collection('packages').insertOne(data)
       resolve(result);
     })
   }
