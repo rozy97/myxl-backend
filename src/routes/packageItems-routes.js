@@ -5,9 +5,9 @@ const packageItemsController = require("../controllers/packageItems-controller")
 
 router
   .get("/", packageItemsController.getAllPackageItems)
-  .get("/:id", packageItemsController.getPackageItemById);
-// .post()
-// .put()
-// .delete()
+  .get("/:id", packageItemsController.getPackageItem)
+  .post("/", packageItemsController.addPackageItem)
+  .patch("/:id", packageItemsController.editPackageItem)
+  .delete("/:id", packageItemsController.deletePackageItem);
 
 module.exports = router;

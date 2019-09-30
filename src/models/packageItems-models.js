@@ -11,12 +11,39 @@ const packageItemsModels = {
       resolve(result);
     });
   },
-  getPackageItemById: id => {
+  getPackageItem: id => {
     return new Promise((resolve, reject) => {
       result = conn()
         .collection("packageItems")
         .find({ id })
         .toArray();
+
+      resolve(result);
+    });
+  },
+  addPackageItem: data => {
+    return new Promise((resolve, reject) => {
+      result = conn()
+        .collection("packageItems")
+        .insertOne(data);
+
+      resolve(result);
+    });
+  },
+  editPackageItem: (id, data) => {
+    return new Promise((resolve, reject) => {
+      result = conn()
+        .collection("packageItems")
+        .update({ id }, { $set: data });
+
+      resolve(result);
+    });
+  },
+  deletePackageItem: id => {
+    return new Promise((resolve, reject) => {
+      result = conn()
+        .collection("packageItems")
+        .findOneAndDelete({ id });
 
       resolve(result);
     });
