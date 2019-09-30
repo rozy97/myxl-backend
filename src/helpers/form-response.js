@@ -8,3 +8,5 @@ const formResponse = {
     res.json(success);
   }
 };
+
+module.exports = formResponse
