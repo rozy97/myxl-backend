@@ -4,7 +4,7 @@ const userModels = {
 
     getUser: (number) => {
         return new Promise((resolve, reject) => {
-            result = conn.getDB().collection('users').find().toArray();
+            result = conn.getDB().collection('users').find({"number":number}).toArray();
                 resolve(result)
            
         })

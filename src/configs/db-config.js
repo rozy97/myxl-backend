@@ -1,7 +1,7 @@
 require('dotenv').config();
 const MongoClient = require('mongodb').MongoClient;
 const  mongoURI =  process.env.DB_URI;
-const client = new MongoClient(mongoURI)
+const client = new MongoClient(mongoURI,{ useNewUrlParser: true, useUnifiedTopology: true  })
 ;
 
 let conn
