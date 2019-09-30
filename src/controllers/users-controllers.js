@@ -6,7 +6,7 @@ module.exports = {
     const number = req.params.number;
     userModels.getUser(number)
     .then(result => {
-      formResponse.success(res, 200, result)
+      formResponse.success(res, 200, result[0])
     })
     .catch(error => {
       res.json(error)
