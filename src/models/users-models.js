@@ -1,7 +1,7 @@
 const conn = require("../configs/db-config");
 
 const userModels = {
-  getAllUser: () => {
+  getAllUsers: () => {
     return new Promise((resolve, reject) => {
       result = conn().collection('users').find().toArray();
 
@@ -18,6 +18,13 @@ const userModels = {
 
       resolve(result);
     });
+  },
+
+  addUser: data => {
+    return new Promise((resolve, reject) => {
+      result = conn().collection('users').insertOne(data)
+      resolve(result);
+    })  
   },
 
   setBalance: (number, amount) => {

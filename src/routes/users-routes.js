@@ -4,8 +4,11 @@ const router = express.Router();
 const userController = require('../controllers/users-controllers');
 
 router
-    .get('/', userController.getAlluser)
+    .get('/', userController.getAllUsers)
     .get('/:number', userController.getUser)
-    .post('/topUp/:number', userController.topUp)
+    .post('/topup/:number', userController.topUp)
+    .post('/login/:number', userController.login)
+    .post('/sharebalance/:number', userController.shareBalance)
+    // .post('/buypackage/:number', userController.buyPackage)
 
 module.exports = router;

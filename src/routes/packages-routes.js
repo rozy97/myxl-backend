@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const packagesControllesrs = require("../controllers/packages-controllers");
+const packagesControllers = require("../controllers/packages-controllers");
 
-router.get("/", packagesControllesrs.getAllPackages);
+router
+    .get("/", packagesControllers.getAllPackages)
+    .get("/:id", packagesControllers.getPackage)
+    // .post('/', packagesControllers.addPackage)
+
 
 module.exports = router;

@@ -9,6 +9,14 @@ const packagesModels = {
         .toArray();
       resolve(result);
     });
+  },
+  
+  getPackage: (id) => {
+    return new Promise((resolve, reject) => {
+      result = conn().collection('packages').find({id:id}).toArray();
+
+      resolve(result);
+    })
   }
 };
 

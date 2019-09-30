@@ -9,13 +9,19 @@ module.exports = {
         formResponse.success(res, 200, result);
       })
       .catch(error => res.json(error));
+  },
+
+  getPackage: (req, res) => {
+    const id = req.params.id;
+    packagesModels.getPackage(id)
+    .then(result => {
+      formResponse.success(res, 200, result[0])
+    })
+    .catch(error => {
+      res.json(error)
+    })
   }
-  // getPackagesDetails: (req, res) => {
-  //   packagesModels
-  //     .getPackagesDetails(id)
-  //     .then()
-  //     .catch();
-  // },
+ 
   // getPackagesByCategory: (req, res) => {
   //   packagesModels
   //     .getPackagesByCategory(category)
