@@ -7,5 +7,6 @@ router
     .get("/", packagesControllers.getAllPackages)
     .get("/id/:id", packagesControllers.getPackage)
     .post('/', packagesControllers.addPackage)
+    .patch('/id/:id', packagesControllers.editPackage)
 
 module.exports = router;

@@ -23,6 +23,13 @@ const packagesModels = {
       result = conn().collection('packages').insertOne(data)
       resolve(result);
     })
+  },
+
+  editPackage: (id, data) => {
+    return new Promise((resolve, reject) => {
+      result = conn().collection('packages').updateOne({id:id}, {$set:data})
+      resolve(result);
+    })
   }
 };
 

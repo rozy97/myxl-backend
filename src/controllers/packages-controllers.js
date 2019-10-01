@@ -47,7 +47,7 @@ module.exports = {
     
     const items =[];
     for(let i = 0; i<packageItems.length; i++){
-      let tmp = await packageItemsModels.getPackageItemById(packageItems[i])
+      let tmp = await packageItemsModels.getPackageItem(packageItems[i])
       .then(result => {return result[0]})
       items.push(tmp)
     }
@@ -96,7 +96,59 @@ module.exports = {
     .then(result => {
       formResponse.success(res, 200, data)  
     })
-  }
+  },
+
+  editPackage: async (req, res) => {
+    const id = req.params.id;
+    const name = req.body.name;
+    const price = req.body.price;
+    const validUntil = req.body.validUntil;
+    const description = req.body.description;
+    const termsCondition = req.body.termsCondition;
+    const category = req.body.category; // category ID
+    const subcategory = req.body.subcategory; // subcategory ID of the selected category
+    let packageItems = req.body.packageItems; //array of package items ID
+    
+    //what to get : packageitems by id, categoryname by category id, subcategoryname by subcategory id
+    const categoryName = await categoriesModels.getCategoryByID(category)
+    .then(result => {  
+      return result[0].name;
+    })
+    
+    const subcategoryName = await categoriesModels.getSubCategory(category, subcategory)
+    .then(result => {  
+      return result.name;
+    })
+  
+    const items =[];
+    for(let i = 0; i<packageItems.length; i++){
+      let tmp = await packageItemsModels.getPackageItem(packageItems[i])
+      .then(result => {return result[0]})
+      items.push(tmp)
+    }
+    packageItems = [...items];
+    
+    const data = {
+      name,
+      price,
+      validUntil,
+      description,
+      termsCondition,
+      category,
+      subcategory,
+      packageItems,
+      categoryName,
+      subcategoryName
+    }
+    packagesModels.editPackage(id,data)
+    .then(result => {
+      const dataResponse = {
+        id,
+        ...data
+      }
+      formResponse.success(res, 200, dataResponse)  
+    })
+  },
  
   // getPackagesByCategory: (req, res) => {
   //   packagesModels
