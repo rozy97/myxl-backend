@@ -2,6 +2,9 @@ const userModels = require('../models/users-models');
 const packagesModels = require("../models/packages-models");
 const formResponse = require('../helpers/form-response');
 
+const dataUri = require('../middleware/multer').dataUri;
+const uploader = require('../configs/cloudinaryConfig').uploader;
+
 module.exports = {
   login: (req, res) => {
     const number = req.params.number;
@@ -43,6 +46,21 @@ module.exports = {
     })
   },
 
+  test: (req, res) => {
+    if(req.file){
+      const file = dataUri(req).content;
+      return uploader.upload(file).then((result) => {
+        const image = result.url;
+        return res.status(200).json({
+          msg:'success',
+          data:{
+            image
+          }
+        })
+      })
+    }
+  },
+
   getAllUsers: (req, res) => {
     userModels.getAllUsers()
     .then(result => {
@@ -53,15 +71,32 @@ module.exports = {
     })
   },
 
-  getUser: (req, res) => { 
+  getUser: async (req, res) => { 
     const number = req.params.number;
-    userModels.getUser(number)
+    let user = await userModels.getUser(number)
     .then(result => {
-      formResponse.success(res, 200, result[0])
+      return result[0];
+      
     })
     .catch(error => {
       res.json(error)
     })
+    
+    //check unlimited package
+    let found = 0;
+    user.packages.map(package => {
+      package.packageItems.map(item => {
+        if(item.value == -1){
+          found = 1;
+        }
+      })
+    })
+    
+    user = {
+      ...user,
+        unlimited:found
+    }
+    formResponse.success(res, 200, user)
   },
   
   buyPackage: async (req, res) => {
@@ -110,16 +145,16 @@ module.exports = {
           case "internet" :
             if(item.value > 0){
               user.totalQuota += item.value;
-              user.remainingQuota += item.value;
+              user.remainingQuota += item.remaining;
             }
             break;
           case "telpon":
             user.totalCall += item.value;
-            user.remainingCall += item.value;
+            user.remainingCall += item.remaining;
             break;
           case "sms":
             user.totalSMS += item.value;
-            user.remainingSMS += item.value;
+            user.remainingSMS += item.remaining;
             break;
         }
       })
@@ -136,7 +171,9 @@ module.exports = {
       if(found){
         //add quota to existing package
         currentPackage.packageItems.map((item, index) => {
-          currentPackage.packageItems[index].value += targetPackage.packageItems[index].value
+          if(currentPackage.packageItems[index].value > 0){
+            currentPackage.packageItems[index].value += targetPackage.packageItems[index].value
+          }
         })
 
         currentPackages.map(pack => {
@@ -182,16 +219,16 @@ module.exports = {
         case "internet" :
           if(item.value > 0){
             user.totalQuota -= item.value;
-            user.remainingQuota -= item.value;
+            user.remainingQuota -= item.remaining;
           }
           break;
         case "telpon":
           user.totalCall -= item.value;
-          user.remainingCall -= item.value;
+          user.remainingCall -= item.remaining;
           break;
         case "sms":
           user.totalSMS -= item.value;
-          user.remainingSMS -= item.value;
+          user.remainingSMS -= item.remaining;
           break;
       }
     })

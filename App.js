@@ -5,7 +5,6 @@ const cors = require('cors');
 const logger = require('morgan');
 const router = require('./src/routes/root');
 
-
 const app = express();
 
 // Body parser middleware
@@ -18,5 +17,5 @@ app.use(helmet({xssFilter:true}));
 app.use('/api',router )
 
 const port = process.env.PORT || 5000;
-
 app.listen(port, () => console.log(`Server running on port ${port}`));
+
