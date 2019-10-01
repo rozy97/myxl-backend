@@ -10,5 +10,6 @@ router
     .post('/login/:number', userController.login)
     .post('/sharebalance/:number', userController.shareBalance)
     .post('/buypackage/:number', userController.buyPackage)
+    .delete('/unsubscribe/:number', userController.removePackage)
 
 module.exports = router;

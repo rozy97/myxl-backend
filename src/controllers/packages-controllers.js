@@ -37,6 +37,7 @@ module.exports = {
     //what to get : packageitems by id, categoryname by category id, subcategoryname by subcategory id
     const categoryName = await categoriesModels.getCategoryByID(category)
     .then(result => {  
+      
       return result[0].name;
     })
     

@@ -26,6 +26,13 @@ const userModels = {
     })  
   },
 
+  updateUser : (number, data) => {
+    return new Promise((resolve, reject) => {
+      result = conn().collection('users').updateOne({number:number}, {$set:data})
+      resolve(result);
+    })
+  },
+
   setBalance: (number, amount) => {
     return new Promise((resolve, reject) => {
       result = conn().collection('users').updateOne({number:number}, {$set:{balance:amount}})
@@ -40,12 +47,20 @@ const userModels = {
     })
   },
 
+  removePackage: (number, package) => {
+    return new Promise((resolve, reject) => {
+      result = conn().collection('users').updateOne({number:number}, {$pull: {packages:{id:package}}})
+      resolve(result);
+    })
+  },
+
   editPackage: (number, package) => {
     return new Promise((resolve, reject) => {
       result = conn().collection('users').updateOne({number:number}, { $set:{packages:package}})
       resolve(result);
     })
   },
+
 };
 
 module.exports = userModels;

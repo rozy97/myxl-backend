@@ -104,6 +104,34 @@ module.exports = {
           currentPackage = pack;
         }
       })
+
+      targetPackage.packageItems.map(item => {
+        switch(item.type){
+          case "internet" :
+            if(item.value > 0){
+              user.totalQuota += item.value;
+              user.remainingQuota += item.value;
+            }
+            break;
+          case "telpon":
+            user.totalCall += item.value;
+            user.remainingCall += item.value;
+            break;
+          case "sms":
+            user.totalSMS += item.value;
+            user.remainingSMS += item.value;
+            break;
+        }
+      })
+      const totalAndRemaining = {
+        totalQuota:user.totalQuota,
+        totalCall:user.totalCall,
+        totalSMS:user.totalSMS,
+        remainingQuota:user.remainingQuota,
+        remainingCall:user.remainingCall,
+        remainingSMS:user.remainingSMS
+      }
+      userModels.updateUser(number,totalAndRemaining)
   
       if(found){
         //add quota to existing package
@@ -131,6 +159,60 @@ module.exports = {
       }
     }
 
+  },
+
+  removePackage: async (req, res) => {
+    const number = req.params.number;
+    const packageID = req.body.packageID;
+
+    
+    const user = await userModels.getUser(number)
+    .then(result => {
+      return result[0];
+    })
+    let targetPackage = {};
+    user.packages.map(pack => {
+      if(pack.id == packageID){
+        targetPackage = pack
+      }
+    })
+    
+    targetPackage.packageItems.map(item => {
+      switch(item.type){
+        case "internet" :
+          if(item.value > 0){
+            user.totalQuota -= item.value;
+            user.remainingQuota -= item.value;
+          }
+          break;
+        case "telpon":
+          user.totalCall -= item.value;
+          user.remainingCall -= item.value;
+          break;
+        case "sms":
+          user.totalSMS -= item.value;
+          user.remainingSMS -= item.value;
+          break;
+      }
+    })
+    const totalAndRemaining = {
+      totalQuota:user.totalQuota,
+      totalCall:user.totalCall,
+      totalSMS:user.totalSMS,
+      remainingQuota:user.remainingQuota,
+      remainingCall:user.remainingCall,
+      remainingSMS:user.remainingSMS
+    }
+    userModels.updateUser(number,totalAndRemaining)
+
+    userModels.removePackage(number, packageID)
+    .then(result => {
+      const data = {
+        number,
+        packageID
+      }
+      formResponse.success(res, 200, data)
+    })
   },
 
   topUp: (req, res) => {
