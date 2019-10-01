@@ -252,32 +252,45 @@ module.exports = {
     })
   },
 
-  topUp: (req, res) => {
+  topUp: async (req, res) => {
     const number = req.params.number;
     const amount = req.body.amount;
 
-    userModels.getUser(number)
+    const user = await userModels.getUser(number)
     .then(result => {
-      return result[0].balance;
+      return result[0];
     })
-    .then(result => {
-      const balance = parseInt(result)+parseInt(amount);
-
-      try {
-        userModels.setBalance(number, balance)
-        const data = {
-          number,
-          balance
-        } 
-        formResponse.success(res, 200, data)
-
-      } catch (error) {
-        res.json(error);
-      }
-    })   
     .catch(error => {
       res.json(error)
     })
+
+  
+    const balance = parseInt(user.balance)+parseInt(amount);
+
+    //reset daysuntilexpired to 30 and set expirationdate
+    user.daysUntilExpired = 30;
+    let date = new Date();
+    date.setDate(date.getDate() + user.daysUntilExpired);
+    user.expirationDate = date;
+    let expiration = {
+      expirationDate:user.expirationDate,
+      daysUntilExpired: user.daysUntilExpired
+    }
+    userModels.updateUser(number, expiration)
+    
+    try {
+      userModels.setBalance(number, balance)
+      
+      const data = {
+        number,
+        balance
+      } 
+      formResponse.success(res, 200, data)
+
+    } catch (error) {
+      res.json(error);
+    }
+      
   },
 
   shareBalance: (req, res) => {
@@ -327,6 +340,41 @@ module.exports = {
     .catch(error => {
       res.json(error)
     })
+  },
 
+  decreaseDay: async (req, res) => {
+    const users = await userModels.getAllUsers()
+    .then(result => {
+      return result
+    })
+    .catch(error => {
+      res.json(error)
+    })
+
+    users.map(user => {
+      let expiration = {};
+      if(user.daysUntilExpired > 0){
+        user.daysUntilExpired -= 1;
+        let date = new Date();
+        date.setDate(date.getDate() + user.daysUntilExpired);
+        user.expirationDate = date;
+
+        expiration = {
+          expirationDate:user.expirationDate,
+          daysUntilExpired: user.daysUntilExpired
+        }
+        let tmpPackages = [];
+        user.packages.map(package => {
+          if(package.validUntil > 0){
+            package.validUntil -= 1;
+            tmpPackages.push(package);
+          } else {
+            userModels.removePackage(user.number, package.id)
+          }
+        })
+        userModels.editPackage(user.number, tmpPackages);
+      }
+      userModels.updateUser(user.number, expiration)
+    })
   }
 };
