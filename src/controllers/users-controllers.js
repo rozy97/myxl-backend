@@ -1,4 +1,5 @@
 const userModels = require('../models/users-models');
+const packagesModels = require("../models/packages-models");
 const formResponse = require('../helpers/form-response');
 
 module.exports = {
@@ -61,6 +62,75 @@ module.exports = {
     .catch(error => {
       res.json(error)
     })
+  },
+  
+  buyPackage: async (req, res) => {
+    const number = req.params.number;
+    const packageID = req.body.packageID;
+    
+    const targetPackage = await packagesModels.getPackage(packageID)
+    .then(result => {
+      return result[0];
+    })
+
+    const user = await userModels.getUser(number)
+    .then(result => {
+      return result[0];
+    })
+
+    //check balance < price ?
+    if(targetPackage.price >= user.balance){
+      res.json({error:'Maaf, pulsa anda tidak mencukupi.'})
+    } else {
+      //pulsa cukup
+
+      //reduce balance
+      const newBalance = user.balance - targetPackage.price
+
+      try {
+        await userModels.setBalance(number, newBalance)
+      } catch (error) {
+        res.json(error);
+      }
+    
+
+      const currentPackages = user.packages;
+      let found = false;
+      let currentPackage = {};
+      await currentPackages.map(pack => {
+        // (pack.id == packageID) ? found = true: null
+        if(pack.id == packageID){
+          found = true;
+          currentPackage = pack;
+        }
+      })
+  
+      if(found){
+        //add quota to existing package
+        currentPackage.packageItems.map((item, index) => {
+          currentPackage.packageItems[index].value += targetPackage.packageItems[index].value
+        })
+
+        currentPackages.map(pack => {
+          if(pack.id == currentPackage.id){
+            pack = currentPackage;
+          }
+        })
+        
+        userModels.editPackage(number, currentPackages)
+        .then(result => {
+          formResponse.success(res, 200, currentPackages);
+        })
+
+      } else {
+        //add new package
+        await userModels.addPackage(number, targetPackage)
+        .then(result => {
+          formResponse.success(res, 200, targetPackage)
+        })
+      }
+    }
+
   },
 
   topUp: (req, res) => {

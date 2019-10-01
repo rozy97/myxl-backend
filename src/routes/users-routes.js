@@ -9,6 +9,6 @@ router
     .post('/topup/:number', userController.topUp)
     .post('/login/:number', userController.login)
     .post('/sharebalance/:number', userController.shareBalance)
-    // .post('/buypackage/:number', userController.buyPackage)
+    .post('/buypackage/:number', userController.buyPackage)
 
 module.exports = router;

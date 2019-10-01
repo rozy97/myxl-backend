@@ -71,7 +71,6 @@ module.exports = {
     let idBack = max+1;
     let tmp = '';
     idBack += '';
-    console.log(max);
   
     for(let i = 1; i <= 3 - idBack.length;i++){
       tmp+='0';
@@ -111,11 +110,6 @@ module.exports = {
   //     .then()
   //     .catch();
   // },
-  // addPackages: (req, res) => {
-  //   packagesModels
-  //     .addPackages(data)
-  //     .then()
-  //     .catch();
         
 
   // },
