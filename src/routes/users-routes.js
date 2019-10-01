@@ -4,18 +4,6 @@ const userController = require('../controllers/users-controllers');
 
 const multerUploads = require('../middleware/multer').multerUploads;
 
-//node schedule
-var cron = require('node-schedule');
-var rule = new cron.RecurrenceRule();
-let sec = [];
-for(let i = 1; i <= 60; i++){
-    sec.push(i);
-}
-rule.second = 50;
-cron.scheduleJob(rule, function(){
-    console.log(new Date(), 'The user second of the minute.');
-});
-
 router
     .get('/', userController.getAllUsers)
     .get('/:number', userController.getUser)
