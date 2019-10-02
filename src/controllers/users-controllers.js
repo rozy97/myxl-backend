@@ -1,5 +1,6 @@
 const userModels = require('../models/users-models');
 const packagesModels = require("../models/packages-models");
+const transactionModels = require('../models/transaction-models');
 const formResponse = require('../helpers/form-response');
 
 const cloudinary = require('../configs/cloudinaryConfig');
@@ -146,7 +147,6 @@ module.exports = {
       res.json({error:'Maaf, pulsa anda tidak mencukupi.'})
     } else {
       //pulsa cukup
-
       //reduce balance
       const newBalance = user.balance - targetPackage.price
 
@@ -156,7 +156,6 @@ module.exports = {
         res.json(error);
       }
     
-
       const currentPackages = user.packages;
       let found = false;
       let currentPackage = {};
@@ -195,7 +194,16 @@ module.exports = {
         remainingSMS:user.remainingSMS
       }
       userModels.updateUser(number,totalAndRemaining)
-  
+      
+      const dataHistory = {
+        number,
+        id: targetPackage.id,
+        name: targetPackage.name,
+        price: targetPackage.price,
+        date: new Date().toDateString()
+      };
+      transactionModels.newTransaction(dataHistory);
+
       if(found){
         //add quota to existing package
         currentPackage.packageItems.map((item, index) => {
