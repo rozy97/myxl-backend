@@ -44,6 +44,13 @@ const packagesModels = {
       result = conn().collection('packages').updateOne({id:id}, {$set:data})
       resolve(result);
     })
+  },
+
+  deletePackage: (id) => {
+    return new Promise((resolve, reject) => {
+      result = conn().collection('packages').remove({id:id})
+      resolve(result);
+    })
   }
 };
 

@@ -5,6 +5,10 @@ const formResponse = require('../helpers/form-response');
 const cloudinary = require('../configs/cloudinaryConfig');
 
 module.exports = {
+  test: (req, res) => {
+
+  },
+
   login: (req, res) => {
     const number = req.params.number;
     userModels.getUser(number)
@@ -370,9 +374,6 @@ module.exports = {
     const users = await userModels.getAllUsers()
     .then(result => {
       return result
-    })
-    .catch(error => {
-      res.json(error)
     })
 
     users.map(user => {

@@ -9,5 +9,5 @@ router
     .get('/subcategory/:categoryID/:subcategoryID', packagesControllers.getPackagesBySubcategory)
     .post('/', packagesControllers.addPackage)
     .patch('/id/:id', packagesControllers.editPackage)
-
+    .delete('/id/:id', packagesControllers.deletePackage)
 module.exports = router;

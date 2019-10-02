@@ -160,6 +160,18 @@ module.exports = {
       formResponse.success(res, 200, result)
     })
   },
+
+  deletePackage: (req, res) => {
+    const id = req.params.id;
+    packagesModels.deletePackage(id)
+    .then(result => {
+      formResponse.success(res, 200, {id})
+    })
+    .catch(err => {
+      res.json(err)
+    })
+  },
+
   // getPackagesByCategory: (req, res) => {
   //   packagesModels
   //     .getPackagesByCategory(category)
@@ -168,10 +180,4 @@ module.exports = {
   // },
 
         
-  // deletePackages: (req, res) => {
-  //   packagesModels
-  //     .detelePackages(id)
-  //     .then()
-  //     .catch();
-  // }
 };

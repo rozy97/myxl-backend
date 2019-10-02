@@ -16,4 +16,6 @@ router
     .patch('/photo/:number', multerUploads, userController.editPhoto)
     .patch('/profile/:number',  userController.editProfile)
 
+    // .post('/test', userController.test)
+
 module.exports = router;
