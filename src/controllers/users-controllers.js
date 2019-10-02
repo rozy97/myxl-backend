@@ -6,8 +6,43 @@ const formResponse = require('../helpers/form-response');
 const cloudinary = require('../configs/cloudinaryConfig');
 
 module.exports = {
-  test: (req, res) => {
+  otpLogin: (req, res) => {
+    const number = req.params.number;
+    //generate 6 digit OTP
+    let otp ='';
+    for(let i = 0; i < 6; i++){
+      otp += Math.floor(Math.random()*10);
+    }
+    
+    const data = {
+      number:number,
+      otp:otp
+    }
 
+    userModels.setOtp(data);
+    setTimeout(()=>{
+      console.log('asd')
+    }, 5000),
+    
+    res.json(data);
+  },
+  
+  otpVerify: async (req, res) => {
+    const number = req.params.number;
+    const otp = req.body.otp;
+
+    const tmpOtp = await userModels.getOtp(number)
+    .then(result => {
+      return result[0];
+    })
+    
+    if(tmpOtp.otp == otp){
+      userModels.removeOtp(number);
+      res.json({msg:'login success'})
+    } else {
+      res.json({msg:'login failed'})
+    }
+    
   },
 
   login: (req, res) => {
@@ -209,6 +244,7 @@ module.exports = {
         currentPackage.packageItems.map((item, index) => {
           if(currentPackage.packageItems[index].value > 0){
             currentPackage.packageItems[index].value += targetPackage.packageItems[index].value
+            currentPackage.packageItems[index].remaining += targetPackage.packageItems[index].remaining
           }
         })
 

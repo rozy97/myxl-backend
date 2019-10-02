@@ -25,6 +25,27 @@ const userModels = {
       resolve(result);
     })  
   },
+  
+  setOtp: data => {
+    return new Promise((resolve, reject) => {
+      result = conn().collection('otp').insertOne(data)
+      resolve(result);
+    })  
+  },
+
+  getOtp: number => {
+    return new Promise((resolve, reject) => {
+      result = conn().collection('otp').find({number:number}).toArray();  
+      resolve(result);
+    })  
+  },
+
+  removeOtp: (number) => {
+    return new Promise((resolve, reject) => {
+      result = conn().collection('otp').remove({number:number})
+      resolve(result);
+    })
+  },
 
   updateUser : (number, data) => {
     return new Promise((resolve, reject) => {
