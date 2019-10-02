@@ -5,7 +5,7 @@ const categoryController = require('../controllers/category-controllers');
 
 router
     .get('/', categoryController.getAllCategories)
-    .get('/:id', categoryController.getCategoryByID)
+    .get('/id/:id', categoryController.getCategoryByID)
     .get('/sub/:categoryID', categoryController.getAllSubCategories)
     .get('/sub/:categoryID/:subcategoryID', categoryController.getSubCategory)
 
