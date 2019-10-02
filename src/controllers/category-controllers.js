@@ -11,19 +11,23 @@ module.exports = {
         .catch(error => res.json(error))
 
         const tmpCategories = [];
+        let count = 0;
         categories.map(async (category, index) => {
             const packages = await packageModels.getPackagesByCategory(category.id)
             .then(result => {
                 return result;
             })
             .catch(error => res.json(error))
+           
             category = {
                 ...category,
                 totalPackages:packages.length
             }
-            await tmpCategories.push(category);
+            // await tmpCategories.push(category);
+            tmpCategories[index] = category;
 
-            if(index == categories.length - 1){
+            count++;
+            if(count == categories.length){
                 formResponse.success(res, 200, tmpCategories);
             }
         })
