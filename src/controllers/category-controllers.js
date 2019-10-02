@@ -1,13 +1,32 @@
 const categoriesModels = require('../models/category-models');
+const packageModels = require('../models/packages-models');
 const formResponse = require('../helpers/form-response');
 
 module.exports = {
-    getAllCategories: (req, res) => {
-        categoriesModels.getAllCategories()
+    getAllCategories: async (req, res) => {
+        const categories = await categoriesModels.getAllCategories()
         .then(result => {
-            formResponse.success(res, 200, result);
+            return result;
         })
         .catch(error => res.json(error))
+
+        const tmpCategories = [];
+        categories.map(async (category, index) => {
+            const packages = await packageModels.getPackagesByCategory(category.id)
+            .then(result => {
+                return result;
+            })
+            .catch(error => res.json(error))
+            category = {
+                ...category,
+                totalPackages:packages.length
+            }
+            await tmpCategories.push(category);
+
+            if(index == categories.length - 1){
+                formResponse.success(res, 200, tmpCategories);
+            }
+        })
     },
 
     getCategoryByID: (req, res) => {

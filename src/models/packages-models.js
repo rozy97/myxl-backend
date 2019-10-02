@@ -18,6 +18,13 @@ const packagesModels = {
     })
   },
 
+  getPackagesByCategory: (categoryID) => {
+    return new Promise((resolve, reject) => {
+      result = conn().collection('packages').find({category:categoryID}).toArray();
+      resolve(result);
+    })
+  },
+
   getPackagesBySubcategory: (categoryID,subcategoryID) => {
     return new Promise((resolve, reject) => {
       result = conn().collection('packages').find({category:categoryID, subcategory:subcategoryID}).toArray();
