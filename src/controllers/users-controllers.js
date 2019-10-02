@@ -2,8 +2,8 @@ const userModels = require('../models/users-models');
 const packagesModels = require("../models/packages-models");
 const transactionModels = require('../models/transaction-models');
 const formResponse = require('../helpers/form-response');
-
 const cloudinary = require('../configs/cloudinaryConfig');
+const Nexmo = require('nexmo');
 
 module.exports = {
   otpLogin: (req, res) => {
@@ -21,9 +21,25 @@ module.exports = {
 
     userModels.setOtp(data);
     setTimeout(()=>{
-      console.log('asd')
-    }, 5000),
+      userModels.removeOtp(number);
+    }, 120000);
+
+    //sms//////////////////////////////////
+    const nexmo = new Nexmo({
+      apiKey: 'c3d89fcb',
+      apiSecret: 'lmFFq8a0cZOoffCq',
+    });
     
+    const from = 'demy myxl';
+    // const to = '6281910508754';
+    const to = '62'+number.slice(1,number.length);
+    
+    const text = 'Your One Time Password : ' + data.otp + '  ';
+    
+    nexmo.message.sendSms(from, to, text);
+    console.log('sms sent');
+    ///////////////////////////////////////////////
+
     res.json(data);
   },
   
@@ -35,13 +51,54 @@ module.exports = {
     .then(result => {
       return result[0];
     })
-    
-    if(tmpOtp.otp == otp){
-      userModels.removeOtp(number);
-      res.json({msg:'login success'})
+    if(tmpOtp){
+      if(tmpOtp.otp == otp){
+        userModels.removeOtp(number);
+
+        userModels.getUser(number)
+        .then(result => {
+          if(result.length){
+            formResponse.success(res, 200, result[0])
+          } else {
+            // get date now + daysUntilExpired, expirationdate = 30days from registered
+            var expDate = new Date();
+            expDate.setDate(expDate.getDate() + 30);
+            
+            const data ={
+              number: number,
+              name: "Welcome",
+              email: "",
+              photo: "",
+              alternateNumber: number,
+              balance: 0,
+              expirationDate: expDate,
+              daysUntilExpired: 30,
+              totalQuota:0,
+              totalCall:0,
+              totalSMS:0,
+              remainingQuota: 0,
+              remainingCall: 0,
+              remainingSMS: 0,
+              packages: []
+            }   
+
+            userModels.addUser(data)
+            .then(result => {
+              formResponse.success(res, 200, data)
+            })
+            .catch(error => {
+              res.json(error)
+            })
+          }     
+        })
+        // res.json({msg:'login success'})
+      } else {
+        res.json({error:'login failed, input correct OTP!'})
+      }
     } else {
-      res.json({msg:'login failed'})
+      res.json({error:'OTP expired'})
     }
+    
     
   },
 
