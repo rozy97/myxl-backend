@@ -4,9 +4,9 @@ const router = express.Router();
 const transactionControllers = require("../controllers/transaction-controllers");
 
 router
-  .get("/", transactionControllers.getAllTransaction)
+  .get("/all", transactionControllers.getAllTransaction)
   .get("/:number", transactionControllers.getUserTransaction)
-  .get("/:month", transactionControllers.getTransactionByMonth)
+  .get("/month/:month", transactionControllers.getTransactionByMonth)
   .post("/:number", transactionControllers.newTransaction);
 
 module.exports = router;
