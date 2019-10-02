@@ -20,11 +20,16 @@ module.exports = {
       .catch(error => console.log(error));
   },
   getTransactionByMonth: (req, res) => {
-    const month = `/${req.params.month}/`;
+    const capitalize = s => {
+      if (typeof s !== "string") return "";
+      return s.charAt(0).toUpperCase() + s.slice(1);
+    };
+    const month = capitalize(req.params.month.substring(0, 3));
+
     transactionModels
-      .getTransactionByMonth(month)
+      .getTransactionByMonth(req.params.month)
       .then(result => {
-        formResponse.success(res, 200, result);
+        formResponse.success(res, 200, result, result.length);
       })
       .catch(error => console.log(error));
   },

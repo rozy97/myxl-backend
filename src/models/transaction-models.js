@@ -23,7 +23,7 @@ const transactionModels = {
     return new Promise((resolve, reject) => {
       result = conn()
         .collection("transaction")
-        .find({ date: month })
+        .find({ date: { $regex: month } })
         .toArray();
       resolve(result);
     });
