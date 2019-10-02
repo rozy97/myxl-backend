@@ -3,9 +3,12 @@ const conn = require("../configs/db-config");
 const userModels = {
   getAllUsers: () => {
     return new Promise((resolve, reject) => {
-      result = conn().collection('users').find().toArray();
+      result = conn()
+        .collection("users")
+        .find()
+        .toArray();
       resolve(result);
-    })
+    });
   },
 
   getUser: number => {
@@ -21,46 +24,88 @@ const userModels = {
 
   addUser: data => {
     return new Promise((resolve, reject) => {
-      result = conn().collection('users').insertOne(data)
+      result = conn()
+        .collection("users")
+        .insertOne(data);
       resolve(result);
-    })  
+    });
   },
 
-  updateUser : (number, data) => {
+  setOtp: data => {
     return new Promise((resolve, reject) => {
-      result = conn().collection('users').updateOne({number:number}, {$set:data})
+      result = conn()
+        .collection("otp")
+        .insertOne(data);
       resolve(result);
-    })
+    });
+  },
+
+  getOtp: number => {
+    return new Promise((resolve, reject) => {
+      result = conn()
+        .collection("otp")
+        .find({ number: number })
+        .toArray();
+      resolve(result);
+    });
+  },
+
+  removeOtp: number => {
+    return new Promise((resolve, reject) => {
+      result = conn()
+        .collection("otp")
+        .removeOne({ number: number });
+      resolve(result);
+    });
+  },
+
+  updateUser: (number, data) => {
+    return new Promise((resolve, reject) => {
+      result = conn()
+        .collection("users")
+        .updateOne({ number: number }, { $set: data });
+      resolve(result);
+    });
   },
 
   setBalance: (number, amount) => {
     return new Promise((resolve, reject) => {
-      result = conn().collection('users').updateOne({number:number}, {$set:{balance:amount}})
+      result = conn()
+        .collection("users")
+        .updateOne({ number: number }, { $set: { balance: amount } });
       resolve(result);
-    })
+    });
   },
 
   addPackage: (number, package) => {
     return new Promise((resolve, reject) => {
-      result = conn().collection('users').updateOne({number:number}, { $push:{packages:package}})
+      result = conn()
+        .collection("users")
+        .updateOne({ number: number }, { $push: { packages: package } });
       resolve(result);
-    })
+    });
   },
 
   removePackage: (number, package) => {
     return new Promise((resolve, reject) => {
-      result = conn().collection('users').updateOne({number:number}, {$pull: {packages:{id:package}}})
+      result = conn()
+        .collection("users")
+        .updateOne(
+          { number: number },
+          { $pull: { packages: { id: package } } }
+        );
       resolve(result);
-    })
+    });
   },
 
   editPackage: (number, package) => {
     return new Promise((resolve, reject) => {
-      result = conn().collection('users').updateOne({number:number}, { $set:{packages:package}})
+      result = conn()
+        .collection("users")
+        .updateOne({ number: number }, { $set: { packages: package } });
       resolve(result);
-    })
-  },
-
+    });
+  }
 };
 
 module.exports = userModels;
