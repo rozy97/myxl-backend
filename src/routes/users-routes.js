@@ -13,6 +13,7 @@ router
     .post('/buypackage/:number', userController.buyPackage)
     .delete('/unsubscribe/:number', userController.removePackage)
 
-    .post('/test', multerUploads, userController.test)
+    .patch('/photo/:number', multerUploads, userController.editPhoto)
+    .patch('/profile/:number',  userController.editProfile)
 
 module.exports = router;

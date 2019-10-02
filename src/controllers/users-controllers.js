@@ -2,8 +2,7 @@ const userModels = require('../models/users-models');
 const packagesModels = require("../models/packages-models");
 const formResponse = require('../helpers/form-response');
 
-const dataUri = require('../middleware/multer').dataUri;
-const uploader = require('../configs/cloudinaryConfig').uploader;
+const cloudinary = require('../configs/cloudinaryConfig');
 
 module.exports = {
   login: (req, res) => {
@@ -46,19 +45,44 @@ module.exports = {
     })
   },
 
-  test: (req, res) => {
+  editPhoto: async (req, res) => {
+    const number = req.params.number;
+    let photo = '';
     if(req.file){
-      const file = dataUri(req).content;
-      return uploader.upload(file).then((result) => {
-        const image = result.url;
-        return res.status(200).json({
-          msg:'success',
-          data:{
-            image
-          }
-        })
+      photo = await cloudinary.uploader.upload(req.file.path, function(err, result){
+        return result;
       })
     }
+    const data = {
+      number,
+      photo:photo.url
+    }
+    await userModels.updateUser(number, data)
+    .then(result => {
+      formResponse.success(res, 200, result, data)
+    })
+    .catch(error => {
+      res.json(error)
+    })
+  },
+
+  editProfile: (req, res) => {
+    const number = req.params.number;
+    const email = req.body.email;
+    const alternateNumber = req.body.alternateNumber;
+   
+    const data = {
+      email,
+      alternateNumber
+    }
+
+    userModels.updateUser(number, data)
+    .then(result => {
+      formResponse.success(res, 200,  data)
+    })
+    .catch(error => {
+      res.json(error)
+    })
   },
 
   getAllUsers: (req, res) => {
