@@ -151,27 +151,23 @@ module.exports = {
     })
   },
  
+  getPackagesBySubcategory: (req, res) => {
+    const categoryID = req.params.categoryID;
+    const subcategoryID = req.params.subcategoryID;
+
+    packagesModels.getPackagesBySubcategory(categoryID, subcategoryID)
+    .then(result => {
+      formResponse.success(res, 200, result)
+    })
+  },
   // getPackagesByCategory: (req, res) => {
   //   packagesModels
   //     .getPackagesByCategory(category)
   //     .then()
   //     .catch();
   // },
-  // getPackagesByName: (req, res) => {
-  //   packagesModels
-  //     .getPackagesByName(name)
-  //     .then()
-  //     .catch();
-  // },
-        
 
-  // },
-  // EditPackages: (req, res) => {
-  //   packagesModels
-  //     .EditPackages(id, data)
-  //     .then()
-  //     .catch();
-  // },
+        
   // deletePackages: (req, res) => {
   //   packagesModels
   //     .detelePackages(id)

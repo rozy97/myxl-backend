@@ -17,6 +17,13 @@ const packagesModels = {
       resolve(result);
     })
   },
+
+  getPackagesBySubcategory: (categoryID,subcategoryID) => {
+    return new Promise((resolve, reject) => {
+      result = conn().collection('packages').find({category:categoryID, subcategory:subcategoryID}).toArray();
+      resolve(result);
+    })
+  },
   
   addPackage: (data) => {
     return new Promise((resolve, reject) => {

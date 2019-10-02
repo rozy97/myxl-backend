@@ -6,6 +6,7 @@ const packagesControllers = require("../controllers/packages-controllers");
 router
     .get("/", packagesControllers.getAllPackages)
     .get("/id/:id", packagesControllers.getPackage)
+    .get('/subcategory/:categoryID/:subcategoryID', packagesControllers.getPackagesBySubcategory)
     .post('/', packagesControllers.addPackage)
     .patch('/id/:id', packagesControllers.editPackage)
 
