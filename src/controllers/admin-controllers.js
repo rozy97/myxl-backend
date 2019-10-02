@@ -74,7 +74,7 @@ module.exports = {
 
             const data = {
               user: {
-                id: result[0].id,
+                id: result[0]._id,
                 name: result[0].name,
                 email: result[0].email
               },
