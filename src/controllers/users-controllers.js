@@ -37,10 +37,9 @@ module.exports = {
     const text = 'Your One Time Password : ' + data.otp + '  ';
     
     nexmo.message.sendSms(from, to, text);
-    console.log('sms sent');
     ///////////////////////////////////////////////
 
-    res.json(data);
+    res.json({msg:'OTP is sent to' + number + 'via sms'});
   },
   
   otpVerify: async (req, res) => {
@@ -476,6 +475,9 @@ module.exports = {
     .then(result => {
       return result
     })
+    .catch(err => {
+      res.json(err)
+    })
 
     users.map(user => {
       let expiration = {};
@@ -501,6 +503,12 @@ module.exports = {
         userModels.editPackage(user.number, tmpPackages);
       }
       userModels.updateUser(user.number, expiration)
+      .then(result => {
+        console.log('result', user.number);
+      })
+      .catch(error => {
+        console.log("error : " + user.number + " is already expired")
+      })
     })
   }
 };

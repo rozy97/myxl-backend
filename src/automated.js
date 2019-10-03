@@ -6,13 +6,9 @@ const decreaseDay = () => {
     const cron = require('node-schedule');
     const rule = new cron.RecurrenceRule();
 
-    // let sec = [];
-    // for(let i = 1; i <= 60; i++){
-    //     sec.push(i);
-    // }
-    // rule.second = sec;
-    // rule.second = 5;
-    rule.minute = 1;// schedule on minute 1 of every hour
+    // rule.second = [5, 15, 35, 55];
+    // rule.minute = 10 ;
+    rule.hour = 9;
 
 
     cron.scheduleJob(rule, function(){
