@@ -19,8 +19,8 @@ router
   .get("/otp/login/:number", userController.otpLogin)
   .post("/otp/login/:number", userController.otpVerify)
 
-  .get('/test', () => {
-    send.JSON({msg:'asd'})
-  })
+  .get('/test/asd',
+    (req, res) => res.send('Hello World!')
+  )
 
 module.exports = router;
