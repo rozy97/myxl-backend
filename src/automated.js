@@ -12,8 +12,8 @@ const decreaseDay = () => {
 
 
     cron.scheduleJob(rule, function(){
-        let date = new Date();
-        date.setDate(date.getDate() + 15);
+        // let date = new Date();
+        // date.setDate(date.getDate() + 15);
         // console.log(date);
         userController.decreaseDay();
     });
