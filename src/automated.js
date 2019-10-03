@@ -7,7 +7,7 @@ const decreaseDay = () => {
     const rule = new cron.RecurrenceRule();
 
     // rule.second = [5, 15, 35, 55];
-    // rule.minute = 10 ;
+    rule.minute = 1 ;
     rule.hour = 9;
 
 
