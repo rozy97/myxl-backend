@@ -22,7 +22,7 @@ module.exports = {
     userModels.setOtp(data);
     setTimeout(() => {
       userModels.removeOtp(number);
-    }, 120000);
+    }, 300000);
 
     //sms//////////////////////////////////
     const nexmo = new Nexmo({
@@ -39,7 +39,7 @@ module.exports = {
     nexmo.message.sendSms(from, to, text);
     ///////////////////////////////////////////////
 
-    res.json({msg:'OTP is sent to' + number + 'via sms'});
+    res.json({msg:'OTP is sent to +' + to + ' via sms'});
   },
 
   otpVerify: async (req, res) => {

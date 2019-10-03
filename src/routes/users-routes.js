@@ -17,6 +17,10 @@ router
   .patch("/profile/:number", userController.editProfile)
 
   .get("/otp/login/:number", userController.otpLogin)
-  .post("/otp/login/:number", userController.otpVerify);
+  .post("/otp/login/:number", userController.otpVerify)
+
+  .get('/test', () => {
+    send.JSON({msg:'asd'})
+  })
 
 module.exports = router;
