@@ -165,10 +165,12 @@ module.exports = {
 
   editProfile: (req, res) => {
     const number = req.params.number;
+    const name = req.body.name;
     const email = req.body.email;
     const alternateNumber = req.body.alternateNumber;
 
     const data = {
+      name,
       email,
       alternateNumber
     };
