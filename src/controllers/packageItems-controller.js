@@ -75,11 +75,15 @@ module.exports = {
   },
   editPackageItem: (req, res) => {
     const id = req.params.id;
-    const data = req.body;
+    let data = req.body;
     packageItemsModels
       .editPackageItem(id, data)
       .then(result => {
-        formResponse.success(res, 200, result);
+        data = {
+          id,
+          ...data
+        }
+        formResponse.success(res, 200, data);
       })
       .catch(error => res.json(error));
   },
@@ -88,7 +92,7 @@ module.exports = {
     packageItemsModels
       .deletePackageItem(id)
       .then(result => {
-        formResponse.success(res, 200, result);
+        formResponse.success(res, 200, id);
       })
       .catch(error => res.json(error));
   }
