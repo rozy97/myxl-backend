@@ -64,7 +64,7 @@ module.exports = {
       type: req.body.type,
       name: req.body.name,
       value: req.body.value,
-      remaining: req.body.remaining
+      remaining: req.body.value
     };
     packageItemsModels
       .addPackageItem(data)
