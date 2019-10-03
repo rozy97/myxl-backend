@@ -69,7 +69,7 @@ module.exports = {
     packageItemsModels
       .addPackageItem(data)
       .then(result => {
-        formResponse.success(res, 200, result);
+        formResponse.success(res, 200, data);
       })
       .catch(error => res.json(error));
   },
