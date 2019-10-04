@@ -32,7 +32,8 @@ module.exports = {
 
     const from = "demy myxl";
     // const to = '6281910508754';
-    const to = "62" + number.slice(1, number.length);
+    let tmpNumber = number;
+    const to = "62" + tmpNumber.slice(1, tmpNumber.length);
 
     const text = "Your One Time Password : " + data.otp + "  ";
 
