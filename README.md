@@ -4,6 +4,39 @@
 
 Rent App is a simple rent application specially for backend only. Built with NodeJs using the ExpressJs Framework.
 Express.js is a web application framework for Node.js. [More about Express](https://en.wikipedia.org/wiki/Express.js)
+
+## Contributors
+
+<table border="0">
+  <tr>
+    <td align="center">
+      <a href="https://github.com/firmansyahfachmi">
+        <img width="110" src="https://avatars1.githubusercontent.com/firmansyahfachmi" alt="M Fachmi Firmansyah"><br/>
+          <sub><b>M Fachmi Firmansyah</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/mahendragalih26">
+        <img width="110" src="https://avatars1.githubusercontent.com/mahendragalih26" alt="Galih Mahendra W"><br/>
+          <sub><b>Galih Mahendra W</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/rozy97">
+        <img width="110" src="https://avatars1.githubusercontent.com/rozy97" alt="Firmansyah Rozy"><br/>
+          <sub><b>Firmansyah Rozy</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/fikribasa">
+        <img width="110" src="https://avatars1.githubusercontent.com/fikribasa" alt="M Fikri Basa"><br/>
+          <sub><b>M Fikri Basa</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+
 ## Built With
 [![Express.js](https://img.shields.io/badge/Express.js-4.x-orange.svg?style=rounded-square)](https://expressjs.com/en/starter/installing.html)
 [![Node.js](https://img.shields.io/badge/Node.js-v.10.16-green.svg?style=rounded-square)](https://nodejs.org/)
