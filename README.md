@@ -70,5 +70,6 @@ DATABASE=simple-rest
 NODE_ENV=development node server.js
 ```
 
-## End Point
+## End Point (API Documentation)
+Open [documentation.rest]() file to se more about API documentation.
 <img src="https://raw.githubusercontent.com/rozy97/pic/master/api-documentation.png">
