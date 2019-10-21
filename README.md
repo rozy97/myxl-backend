@@ -7,7 +7,7 @@ Express.js is a web application framework for Node.js. [More about Express](http
 
 ## Contributors
 
-<table border="0">
+<table border="0" align="center">
   <tr>
     <td align="center">
       <a href="https://github.com/firmansyahfachmi">
