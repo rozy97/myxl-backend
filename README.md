@@ -11,19 +11,19 @@ Express.js is a web application framework for Node.js. [More about Express](http
   <tr>
     <td align="center">
       <a href="https://github.com/firmansyahfachmi">
-        <img width="130" src="https://avatars1.githubusercontent.com/firmansyahfachmi" alt="M Fachmi Firmansyah"><br/>
+        <img width="200" src="https://avatars1.githubusercontent.com/firmansyahfachmi" alt="M Fachmi Firmansyah"><br/>
           <sub><b>M Fachmi Firmansyah</b></sub>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/mahendragalih26">
-        <img width="130" src="https://avatars1.githubusercontent.com/mahendragalih26" alt="Galih Mahendra W"><br/>
+        <img width="200" src="https://avatars1.githubusercontent.com/mahendragalih26" alt="Galih Mahendra W"><br/>
           <sub><b>Galih Mahendra W</b></sub>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/rozy97">
-        <img width="130" src="https://avatars1.githubusercontent.com/rozy97" alt="Firmansyah Rozy"><br/>
+        <img width="200" src="https://avatars1.githubusercontent.com/rozy97" alt="Firmansyah Rozy"><br/>
           <sub><b>Firmansyah Rozy</b></sub>
       </a>
     </td>
