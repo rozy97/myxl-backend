@@ -1,0 +1,19 @@
+### Get All Users
+GET http://18.140.51.229:5000/api/user
+
+### Get All Packages
+GET http://18.140.51.229:5000/api/packages
+
+### Login
+POST http://18.140.51.229:5000/api/user/login/081234567890
+
+### Get All Transaction
+GET http://18.140.51.229:5000/api/transaction/all
+
+### Login Admin
+POST http://18.140.51.229:5000/api/admin/login 
+Content-Type: application/json
+{
+    "email":"",
+    "password": ""
+}
