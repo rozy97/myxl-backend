@@ -1,4 +1,4 @@
-<h1 align="center">Rent Book App - Simple App RESTfull API</h1>
+<h1 align="center"><b>MyXL Backend</b></h1>
 
 
 
