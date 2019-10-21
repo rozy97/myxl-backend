@@ -6,8 +6,8 @@ Rent App is a simple rent application specially for backend only. Built with Nod
 Express.js is a web application framework for Node.js. [More about Express](https://en.wikipedia.org/wiki/Express.js)
 
 ## Contributors
-
-<table border="0" align="center">
+<p align="center">
+<table border="0">
   <tr>
     <td align="center">
       <a href="https://github.com/firmansyahfachmi">
@@ -34,7 +34,7 @@ Express.js is a web application framework for Node.js. [More about Express](http
       </a>
     </td>
   </tr>
-</table>
+</table></p>
 
 
 ## Built With
