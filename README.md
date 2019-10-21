@@ -71,30 +71,4 @@ NODE_ENV=development node server.js
 ```
 
 ## End Point
-**1. GET**
-* `/book`
-* `/book/?search=i&sortby=title ASC&limit=10&page=1&availability=1`
-* `/book/:id` (Get book by id)
-* `/genre
-
-**2. POST**
-* `/book`
-    * ``` { "title": "Pablo Escobar", "description": "Fly in the sky", "image": "sky.jpg", "date_released": "2019-10-08", "genre_id": "2", "availability": "1" } ```
-
-* `/genre`
-    * ``` { "genre_name": "Category6" } ```
-    
-* `/rent`
-   * ``` { "book_id": "10", "user_id": "1" } ```
-
-**3. PATCH**
-* `/book/:id` (Update book by id)
-   * ``` { "title": "Party", "note": "Herman's Party at 18.00", "category": 2 } ```
-* `/genre/:id` (Update genre by id)
-   * ``` { "categoryName": "Category8" } ```
-* `/return/:id` (Update book availability)
-   * ``` { "categoryName": "Category8" } ```
-
-**4. DELETE**
-* `/book/:id` (Delete book by id)
-* `/genre/:id` (Delete genre by id)
+<img src="https://raw.githubusercontent.com/rozy97/pic/master/api-documentation.png">
