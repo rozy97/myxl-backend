@@ -29,7 +29,7 @@ Express.js is a web application framework for Node.js. [More about Express](http
     </td>
     <td align="center">
       <a href="https://github.com/Gimindika">
-        <img width="110" src="https://avatars1.githubusercontent.com/fikribasa" alt="Gerrit Indika Mulya"><br/>
+        <img width="110" src="https://avatars1.githubusercontent.com/Gimindika" alt="Gerrit Indika Mulya"><br/>
           <sub><b>Gerrit Indika Mulya</b></sub>
       </a>
     </td>
