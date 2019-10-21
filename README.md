@@ -71,5 +71,5 @@ NODE_ENV=development node server.js
 ```
 
 ## End Point (API Documentation)
-Open [documentation.rest]() file to se more about API documentation.
+Open [documentation.rest]() file in vscode then run it to se more about API documentation. (dont forget to install REST client extension to enable running dotrest file documentation)
 <img src="https://raw.githubusercontent.com/rozy97/pic/master/api-documentation.png">
