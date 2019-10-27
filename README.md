@@ -5,37 +5,7 @@
 MyXL Backend is a rest api application for cloning MyXL application using react-native and admin site using reactJS. Built with NodeJs using the ExpressJs Framework and NoSQL mongo Database.
 Express.js is a web application framework for Node.js. [More about Express](https://en.wikipedia.org/wiki/Express.js)
 
-## Contributors
-<p align="center">
-<table border="0">
-  <tr>
-    <td align="center">
-      <a href="https://github.com/firmansyahfachmi">
-        <img width="200" src="https://avatars1.githubusercontent.com/firmansyahfachmi" alt="M Fachmi Firmansyah"><br/>
-          <sub><b>M Fachmi Firmansyah</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/mahendragalih26">
-        <img width="200" src="https://avatars1.githubusercontent.com/mahendragalih26" alt="Galih Mahendra W"><br/>
-          <sub><b>Galih Mahendra W</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/rozy97">
-        <img width="200" src="https://avatars1.githubusercontent.com/rozy97" alt="Firmansyah Rozy"><br/>
-          <sub><b>Firmansyah Rozy</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/Gimindika">
-        <img width="200" src="https://avatars1.githubusercontent.com/Gimindika" alt="Gerrit Indika Mulya"><br/>
-          <sub><b>Gerrit Indika Mulya</b></sub>
-      </a>
-    </td>
-  </tr>
-</table>
-</p>
+
 
 
 ## Built With
@@ -73,3 +43,35 @@ NODE_ENV=development node server.js
 ## End Point (API Documentation)
 Open [documentation.rest]() file in vscode then run it to se more about API documentation. (dont forget to install REST client extension to enable running dotrest file documentation)
 <img src="https://raw.githubusercontent.com/rozy97/pic/master/api-documentation.png">
+
+## Contributors
+<p align="center">
+<table border="0">
+  <tr>
+    <td align="center">
+      <a href="https://github.com/firmansyahfachmi">
+        <img width="150" src="https://avatars1.githubusercontent.com/firmansyahfachmi" alt="M Fachmi Firmansyah"><br/>
+          <sub><b>M Fachmi Firmansyah</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/mahendragalih26">
+        <img width="150" src="https://avatars1.githubusercontent.com/mahendragalih26" alt="Galih Mahendra W"><br/>
+          <sub><b>Galih Mahendra W</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/rozy97">
+        <img width="150" src="https://avatars1.githubusercontent.com/rozy97" alt="Firmansyah Rozy"><br/>
+          <sub><b>Firmansyah Rozy</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Gimindika">
+        <img width="150" src="https://avatars1.githubusercontent.com/Gimindika" alt="Gerrit Indika Mulya"><br/>
+          <sub><b>Gerrit Indika Mulya</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+</p>
